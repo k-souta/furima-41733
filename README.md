@@ -6,52 +6,56 @@
 |nikname|string|null:false|
 |email|string|null:false,unique:true|
 |encrypted_password|string|null:false|
-|birth|string|null:false|
+|birth|date|null:false|
+|last_name|string|null:false|
+|last_name_katakana|string|null:false|
+|name|string|null:false|
+|name_katakana|string|null:false|
+
 
 ### Association
 has_many :itmes
+has_one :order
 
 ## Items
 
 |Column|Type|Options|
 |------|----|-------|
 |item_name|string|null:false|
-|categrie_id|integer|null:false|
+|category_id|integer|null:false|
 |cost_id|integer|null:false|
 |item_explanation|string|null:false|
 |cost_load_id|integer|null:false|
-|region_id|integer|null:false|
+|prefectures_id|integer|null:false|
 |day_id|integer|null:false|
-|image|string|null:false|
+|price|string|null:false|
 |user|references|null:false,foreign_key:true|
 
 ### Association
 belongs_to :user
 has_one :order
-has_one :shopping
 
 ## Orders
 
 |Column|Type|Options|
 |------|----|-------|
-|shipping|references|null:false,foreign_key:true|
+|user|references|null:false,foreign_key:true|
 |item|references|null:false,foreign_key:true|
 
 belongs_to :item
-has_one :shipping
+belongs_to :user
 
 ## Shippings
 
 |Column|Type|Options|
 |------|----|-------|
-|price|string|null:false|
 |post|string|null:false|
 |prefectures_id|integer|null:false|
 |municipality|string|null:false|
+|construction|string|null:false|
 |address|string|null:false|
 |phone|string|null:false|
-|item|references|null:false,foreign_key:true|
+|orders|references|null:false,foreign_key:true|
 
 ### Association
 belongs_to :order
-belongs_to :item
