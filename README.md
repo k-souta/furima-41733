@@ -1,51 +1,24 @@
 # README
 
-## Users
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-|Column|Type|Options|
-|------|----|-------|
-|nikname|string|null:false|
-|email|string|null:false,unque:true|
-|password|string|null:false|
+Things you may want to cover:
 
+* Ruby version
 
-### Association
-has_many :itmes
+* System dependencies
 
-## Items
+* Configuration
 
-|Column|Type|Options|
-|------|----|-------|
-|item_name|string|null:false|
-|categries|text|null:false|
-|cost|text|null:false|
-|seller|string|null:false|
-|comment|text|null:false
-|user_id|references|null:false,foreign_key:true|
+* Database creation
 
+* Database initialization
 
-### Association
-belongs_to :user
-has_one :orders
+* How to run the test suite
 
-## Orders
+* Services (job queues, cache servers, search engines, etc.)
 
-|Column|Type|Options|
-|------|----|-------|
-|price|text|null:false|
-|item_id|references|null:false,foreign_key:true|
+* Deployment instructions
 
-
-belongs_to :item
-has_one :shippings
-
-## Shippings
-
-|Column|Type|Options|
-|------|----|-------|
-|address|text|null:false|
-
-
-
-### Association
-belongs_to :order
+* ...
