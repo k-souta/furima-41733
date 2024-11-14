@@ -15,7 +15,7 @@
 
 ### Association
 has_many :itmes
-has_one :order
+has_many :order
 
 ## Items
 
@@ -24,11 +24,11 @@ has_one :order
 |item_name|string|null:false|
 |category_id|integer|null:false|
 |cost_id|integer|null:false|
-|item_explanation|string|null:false|
+|item_explanation|text|null:false|
 |cost_load_id|integer|null:false|
-|prefectures_id|integer|null:false|
-|day_id|integer|null:false|
-|price|string|null:false|
+|prefecture_id|integer|null:false|
+|date_id|integer|null:false|
+|price_id|integer|null:false|
 |user|references|null:false,foreign_key:true|
 
 ### Association
@@ -44,18 +44,19 @@ has_one :order
 
 belongs_to :item
 belongs_to :user
+has_one :shipping
 
 ## Shippings
 
 |Column|Type|Options|
 |------|----|-------|
 |post|string|null:false|
-|prefectures_id|integer|null:false|
+|prefecture_id|integer|null:false|
 |municipality|string|null:false|
-|construction|string|null:false|
+|construction|string|
 |address|string|null:false|
 |phone|string|null:false|
-|orders|references|null:false,foreign_key:true|
+|order|references|null:false,foreign_key:true|
 
 ### Association
 belongs_to :order
