@@ -3,7 +3,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|nikname|string|null:false|
+|nickname|string|null:false|
 |email|string|null:false,unique:true|
 |encrypted_password|string|null:false|
 |birth|date|null:false|
@@ -15,7 +15,7 @@
 
 ### Association
 has_many :itmes
-has_many :order
+has_many :orders
 
 ## Items
 
@@ -27,8 +27,8 @@ has_many :order
 |item_explanation|text|null:false|
 |cost_load_id|integer|null:false|
 |prefecture_id|integer|null:false|
-|date_id|integer|null:false|
-|price_id|integer|null:false|
+|hidzuke_id|integer|null:false|
+|price|integer|null:false|
 |user|references|null:false,foreign_key:true|
 
 ### Association
