@@ -17,33 +17,33 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
-      it 'item_explanationが空では登録出来ない' do
+      it 'item_explanationが1では登録出来ない' do
         @item.item_explanation = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item explanation can't be blank")
       end
-      it 'category_idが空では登録出来ない' do
-        @item.category_id = ''
+      it 'category_idが1では登録出来ない' do
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-      it 'cost_idが空では登録出来ない' do
-        @item.cost_id = ''
+      it 'cost_idが1では登録出来ない' do
+        @item.cost_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Cost can't be blank")
       end
-      it 'cost_load_idが空では登録出来ない' do
-        @item.cost_load_id = ''
+      it 'cost_load_idが1では登録出来ない' do
+        @item.cost_load_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Cost load can't be blank")
       end
-      it 'prefecture_idが空では登録出来ない' do
-        @item.prefecture_id = ''
+      it 'prefecture_idが1では登録出来ない' do
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'hidzuke_idが空では登録出来ない' do
-        @item.hidzuke_id = ''
+      it 'hidzuke_idが1では登録出来ない' do
+        @item.hidzuke_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Hidzuke can't be blank")
       end
@@ -51,6 +51,25 @@ RSpec.describe Item, type: :model do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it '価格は、¥300~¥9,999,999の間でないと保存できない' do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
+
+        @item.price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+      it '価格は半角数値でなければ保存できない' do
+        @item.price = '１００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it '商品画像を1枚つけなければ保存できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it 'ユーザーが紐付いていないと出品は保存できない' do
         @item.user = nil
