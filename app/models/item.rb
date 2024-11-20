@@ -6,10 +6,11 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :cost
   belongs_to :hidzuke
+  belongs_to :user
 
   validates :cost_load_id, :category_id, :cost_id, :prefecture_id, :hidzuke_id,
             numericality: { other_than: 1, message: "can't be blank" }
-  validates :itame_name, presence: true
+  validates :item_name, presence: true
   validates :image, presence: true
   validates :item_explanation, presence: true
 

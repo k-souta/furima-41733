@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_18_124329) do
     t.integer "category_id", null: false
     t.integer "cost_id", null: false
     t.text "item_explanation", null: false
+    t.integer "cost_load_id", null: false
     t.integer "prefecture_id", null: false
     t.integer "hidzuke_id", null: false
     t.integer "price", null: false
