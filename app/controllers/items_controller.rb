@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_item, only: [:edit]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :correct_item]
   def index
     @items = Item.all
     @items = Item.order(created_at: :desc)
@@ -35,7 +35,6 @@ class ItemsController < ApplicationController
   end
 
   def correct_item
-    @item = Item.find(params[:id])
     return if @item.user.id == current_user.id
 
     redirect_to '/'
