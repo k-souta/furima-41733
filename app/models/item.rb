@@ -9,6 +9,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :orders
 
+  def sold_out?
+    orders.exists?
+  end
+
   validates :cost_load_id, :category_id, :cost_id, :prefecture_id, :hidzuke_id,
             numericality: { other_than: 1, message: "can't be blank" }
   validates :item_name, presence: true
