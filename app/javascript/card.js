@@ -1,7 +1,7 @@
 const pay = () => {
   // 公開鍵をセット
   const publicKey = gon.public_key
-  const payjp = Payjp('pk_test_3b748d7cb203bdf204fedaa8');
+  const payjp = Payjp(publicKey);
 
   // Payjp Elementsを作成
   const elements = payjp.elements();
@@ -24,18 +24,16 @@ const pay = () => {
       } else {
         // トークンを取得しフォームに追加
         const token = response.id;
-        const tokenObj = `<input value="${token}" name="token" type="hidden">`;
-        form.insertAdjacentHTML("beforeend", tokenObj);
-
+        const renderDom = document.getElementById("charge-form")
+        const tokenObj = `<input value=${token} name="token" type="hidden">`;
+        renderDom.insertAdjacentHTML("beforeend", tokenObj);
+        }
         // 元の入力要素のname属性を削除
-        document.getElementById("number-form").removeAttribute("name");
-        document.getElementById("cvc-form").removeAttribute("name");
-        document.getElementById("expiry-form").removeAttribute("name");
-
-        // フォームを送信
-        form.submit();
-      }
+        numberElement.clear
+        expiryElement.clear
+        document.getElementById("charge-form").submit()
     });
+     e.preventDefault()
   });
 };
 

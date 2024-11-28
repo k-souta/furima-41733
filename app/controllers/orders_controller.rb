@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
     @orderform = OrderForm.new
-    return unless current_user == @item.user
-    return unless current_user == @item.user || @item.order.present?
+    return unless current_user.id == @item.user.id || @item.orders.present?
 
     redirect_to root_path
   end
