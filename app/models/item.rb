@@ -7,10 +7,10 @@ class Item < ApplicationRecord
   belongs_to :cost
   belongs_to :hidzuke
   belongs_to :user
-  has_many :orders
+  has_one :order
 
   def sold_out?
-    orders.exists?
+    order.present?
   end
 
   validates :cost_load_id, :category_id, :cost_id, :prefecture_id, :hidzuke_id,

@@ -1,16 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
+  before_action :redirect_if_invalid_access, only: [:index, :create]
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
     @orderform = OrderForm.new
-    return unless current_user.id == @item.user.id || @item.orders.present?
-
-    redirect_to root_path
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @orderform = OrderForm.new(order_params)
     if @orderform.valid?
       pay_item
@@ -23,6 +21,16 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def redirect_if_invalid_access
+    return unless current_user.id == @item.user.id || @item.order.present?
+
+    redirect_to root_path
+  end
 
   def order_params
     params.require(:order_form).permit(:post, :prefecture_id, :municipality, :construction, :address, :phone).merge(

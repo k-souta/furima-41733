@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:user, :item)
     @order_form = FactoryBot.build(:order_form, user_id: user.id)
   end
   describe '寄付情報の保存' do
